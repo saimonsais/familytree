@@ -5,5 +5,5 @@ It is your responsibility to keep those data safe!
 
 
 Steps 
-- run createdb.php
+- run config-createdb.php
 - start index.html
