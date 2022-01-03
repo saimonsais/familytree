@@ -7,7 +7,9 @@ A pet project - Just for fun.
   - ppl-firstname
   - ppl-lastname
   - ppl-dateborn
+  - ppl-placeborn
   - ppl-datedeath
+  - ppl-placedeath
   - ppl-desc
 - Table:picture
   - pic-id
