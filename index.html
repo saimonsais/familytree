@@ -1,24 +1,121 @@
 <html>
 <head>
-
+<style>
+.menubox
+    {
+    }
+.menubox ul
+    {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    }
+.menubox li
+    {
+    float: left;
+    }
+    .menubox a 
+    {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;  
+    }
+.container
+    {    
+    border: 3px solid #fff;
+    padding: 20px;
+    }
+.container-bal
+    {    
+    width: 45%;
+    float: left;
+    padding: 20px;
+    border: 2px solid red;
+    }
+.container-jobb
+    {
+    width: 45%;
+    float: left;
+    padding: 20px;
+    border: 2px solid red;
+    }
+.menubox a:hover
+    {
+    background-color: #111;
+    }
+.members td, .members th
+    {
+    border: 1px solid #ddd;
+    padding: 8px;        
+    }
+.members tr:nth-child(even)
+    {
+    background-color: #f2f2f2;
+    }
+.members tr:hover 
+    {
+    background-color: #ddd;
+}
+.members th 
+    {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+    }
+</style>
 </head>
 <body>
 
-<div class="menu">
+<div class="menubox">
     <ul>
-        <li>személy hozzáadása</li>
-        <li>házasság hozzáadása</li>
-        <li>gyermek hozzáadása</li>
+        <li><a href="#">mit hogyan?</a></li>
+        <li><a href="#">személy hozzáadása</a></li>
+        <li><a href="#">házasság hozzáadása</a></li>
+        <li><a href="#">gyermek hozzáadása</a></li>
     </ul>
 </div>
+<div class="container">
+    <div class="container-bal">
+        <h2>Csaladtagok</h2>
+        <table id="members" class="members">
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Born</th>
+              <th>Mother</th>
+              <th>Father</th>
+            </tr>
+            <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>1900.01.01</td>
+                <td>Eva Doe</td>
+                <td>Adam doe</td>
+            </tr>
+            <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>1900.01.01</td>
+                <td>Eva Doe</td>
+                <td>Adam doe</td>
+            </tr>
+            <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>1900.01.01</td>
+                <td>Eva Doe</td>
+                <td>Adam doe</td>
+            </tr>
+        </table>
+    </div>
+    <div class="container-jobb">
+        <h2>Akció</h2>
 
-<a href="asdf.com">új személy hozzáadása</a>
-
-<h1>Családtagok</h1>
-    <ul>
-        <li>Teszt Ferenc</li>
-        <li>Teszt Géza</li>
-        <li>Teszt Ferenc</li>
-    </ul>
-</body>
-</html>
+    </div>
+</div>
