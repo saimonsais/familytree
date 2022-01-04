@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "username";
 $password = "password";
-$dbname = "csaladfa-v1";
+$dbname = "dbname";
 
 // Create connection for database
 $conn = new mysqli($servername, $username, $password);
@@ -29,7 +29,7 @@ if ($conn->connect_error) {
 }
 
 // sql to create table PEOPLE
-$sql = "CREATE TABLE PEOPLE (
+$sql = "CREATE TABLE people (
 PPLid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 PPLfirstname VARCHAR(30) NOT NULL,
 PPLlastname VARCHAR(30) NOT NULL,
@@ -46,12 +46,12 @@ if ($conn->query($sql) === TRUE) {
 }
 
 // sql to create table PICTURE
-$sql = "CREATE TABLE PICTURE (
+$sql = "CREATE TABLE picture (
 PICid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-PICurl VARCHAR(30) TEXT,
-PICperson VARCHAR(30) NOT NULL,
-PICpersonloc VARCHAR(30),
-FOREIGN KEY (PICperson) REFERENCE PEOPLE(PPLid)
+PICurl VARCHAR(30),
+PIClocation VARCHAR(30),
+PICdate DATE,
+PICdesc TEXT
 )";
 if ($conn->query($sql) === TRUE) {
   echo "Table PICTURE created successfully";
@@ -59,8 +59,23 @@ if ($conn->query($sql) === TRUE) {
   echo "Error creating table: " . $conn->error;
 }
 
+// sql to create table PICTUREPEOPLE
+$sql = "CREATE TABLE picturepeople (
+  PICPPLid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  PICPPLpicture INT(6) UNSIGNED NOT NULL,
+  PICPPLperson INT(6) UNSIGNED NOT NULL,
+  PICPPLpersonloc VARCHAR(30) NOT NULL,  
+  FOREIGN KEY(PICPPLpicture) REFERENCES picture(PICid),
+  FOREIGN KEY(PICPPLperson) REFERENCES people(PPLid)
+  )";
+  if ($conn->query($sql) === TRUE) {
+    echo "Table PICTUREPEOPLE created successfully";
+  } else {
+    echo "Error creating table: " . $conn->error;
+  }
+
 // sql to create table EVENTTYPE
-$sql = "CREATE TABLE EVENTTYPE (
+$sql = "CREATE TABLE eventtype (
 EVTYPEid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 EVTYPEname VARCHAR(30) NOT NULL
 )";
@@ -71,14 +86,14 @@ if ($conn->query($sql) === TRUE) {
 }
 
 // sql to create table EVENTMARRIAGE
-$sql = "CREATE TABLE EVENTMARRIAGE(
+$sql = "CREATE TABLE eventmarriage(
 EVMARid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-EVMARhsuband VARCHAR(30) NOT NULL,
-EVMARwife VARCHAR(30) NOT NULL,
+EVMARhusband INT(6) UNSIGNED NOT NULL,
+EVMARwife INT(6) UNSIGNED NOT NULL,
 EVMARstart DATE,
 EVMARend DATE,
-FOREIGN KEY (EVMARhusband) REFERENCE PEOPELE (PPLid),
-FOREIGN KEY (EVMARwife) REFERENCE PEOPELE (PPLid)
+FOREIGN KEY(EVMARhusband) REFERENCES people(PPLid),
+FOREIGN KEY(EVMARwife) REFERENCES people(PPLid)
 )";
 if ($conn->query($sql) === TRUE) {
   echo "Table EVENTMARRIAGE created successfully";
@@ -87,14 +102,14 @@ if ($conn->query($sql) === TRUE) {
 }
 
 // sql to create table EVENTCHILD
-$sql = "CREATE TABLE EVENTCHILD(
+$sql = "CREATE TABLE eventchild(
 EVCHILDid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-EVCHILDfather VARCHAR(30),
-EVCHILDmother VARCHAR(30) NOT NULL,
-EVCHILDchild VARCHAR(30) NOT NULL,
-FOREIGN KEY (EVCHILDfather) REFERENCE PEOPELE (PPLid),
-FOREIGN KEY (EVCHILDmother) REFERENCE PEOPELE (PPLid),
-FOREIGN KEY (EVCHILDchild) REFERENCE PEOPELE (PPLid)
+EVCHILDfather INT(6) UNSIGNED,
+EVCHILDmother INT(6) UNSIGNED NOT NULL,
+EVCHILDchild INT(6) UNSIGNED NOT NULL,
+FOREIGN KEY(EVCHILDfather) REFERENCES people(PPLid),
+FOREIGN KEY(EVCHILDmother) REFERENCES people(PPLid),
+FOREIGN KEY(EVCHILDchild) REFERENCES people(PPLid)
 )";
 if ($conn->query($sql) === TRUE) {
   echo "Table EVENTCHILD created successfully";
@@ -103,14 +118,14 @@ if ($conn->query($sql) === TRUE) {
 }
 
 // sql to create table EVENTOTHER
-$sql = "CREATE TABLE EVENTOTHER (
+$sql = "CREATE TABLE eventother (
 EVOTHid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-EVOTHtype VARCHAR(30) NOT NULL,
-EVOTHperson VARCHAR(30) NOT NULL,
+EVOTHtype INT(6) UNSIGNED NOT NULL,
+EVOTHperson INT(6) UNSIGNED NOT NULL,
 EVOTHdate DATE,
 EVOTHdesc TEXT,
-FOREIGN KEY (EVOTHtype) EVENTTYPE (EVTYPEid),
-FOREIGN KEY (EVOTHperson) REFERENCE PEOPELE (PPLid),
+FOREIGN KEY (EVOTHtype) REFERENCES eventtype(EVTYPEid),
+FOREIGN KEY (EVOTHperson) REFERENCES people(PPLid)
 )";
 if ($conn->query($sql) === TRUE) {
   echo "Table EVENTOTHER created successfully";
