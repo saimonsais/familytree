@@ -47,7 +47,6 @@ JOIN people as apa on apa.PPLid = eventchild.EVCHILDfather
 WHERE eventchild.EVCHILDchild = 3";
 $resultparents = $conn->query($sqlparents);
 
-
 $sqlchildren = "SELECT 
 people.PPLfirstname,
 people.PPLlastname
@@ -58,6 +57,14 @@ WHERE eventchild.EVCHILDfather=1 OR eventchild.EVCHILDmother=1";
 $resultchildren = $conn->query($sqlmasqlchildrenrriages);
 
 
+$sqleventother = "SELECT
+eventother.*,
+eventtype.EVTYPEname
+FROM eventother
+JOIN eventtype on eventother.EVOTHtype=eventtype.EVTYPEid
+JOIN people on eventother.EVOTHperson=people.PPLid
+WHERE people.PPLid = 3";
+$resulteventother = $conn->query($sqleventother)
 $conn->close();
 ?>
 
@@ -93,9 +100,25 @@ $conn->close();
   </textarea>
 
   <h2>Házasság</h2>
+  <?php
+  while($row = $resultmarriages->fetch_assoc())
+    {}
+  ?>
   <h2>Szülők</h2>
+  <?php
+  while($row = $resultparents->fetch_assoc())
+    {}
+  ?>
   <h2>Gyermekek</h2>
+  <?php
+  while($row = $resultchildren->fetch_assoc())
+    {}
+  ?>
   <h2>Egyéb események</h2>
+  <?php
+  while($row = $resulteventother->fetch_assoc())
+    {}
+  ?>
 
     <input type="submit" value="Mentés" name="submitperson">
 </form>
